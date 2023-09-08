@@ -1,4 +1,4 @@
 beautifulsoup4==4.12.2
-pinecone-client==2.2.2
 openai==0.28.0
 python-decouple==3.8
+langchain==0.0.285

@@ -1,7 +1,6 @@
-import pinecone
 import openai
 from decouple import config
-
+import pinecone
 
 
 INDEX = "shakespeare"
@@ -9,12 +8,13 @@ def connect():
     openai.organization = config('OPEN_AI_ORG')
     openai.api_key = config('OPEN_AI_KEY')
 
-    pc_key = config("PINECONE_KEY")
-    pc_env = config('PINECONE_ENV')
-    pinecone.init(api_key=pc_key, environment=pc_env)
+    pinecone.init(api_key=config("PINECONE_KEY"), environment=config("PINECONE_ENV"))
+
+
+def create_idx():
     idxs = pinecone.list_indexes()
     if INDEX not in idxs:
-        pinecone.create_index(INDEX, dimension=1536, metric="euclidean")
+        pinecone.create_index(INDEX, dimension=1536, metric="cosine")
         pinecone.describe_index(INDEX)
 
 def save_embeddings(embeddings):
@@ -23,10 +23,15 @@ def save_embeddings(embeddings):
 
 def query_idx(vec):
     index = pinecone.Index(INDEX)
-    return index.query(vector=vec, top_k=3, include_values=True)
+    res = index.query(vector=vec, top_k=100, include_values=True, namespace="")
+    return list(map(lambda x: x['id'], res.matches))
+
+def delete_idx():
+    pinecone.delete_index(INDEX)
 
 def get_idx_stats():
     index = pinecone.Index(INDEX)
+    print(pinecone.describe_index(INDEX))
     print(index.describe_index_stats())
 
 def create_embedding(text):
