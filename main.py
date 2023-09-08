@@ -44,7 +44,7 @@ def query_embeddings(text):
 
 if __name__=="__main__":
     # store_embeddings()
-    x = query_embeddings("Light")
-    print(x[0])
+    x = query_embeddings("Dark")
+    print(x[len(x)-1])
     
     

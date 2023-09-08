@@ -23,7 +23,7 @@ def save_embeddings(embeddings):
 
 def query_idx(vec):
     index = pinecone.Index(INDEX)
-    res = index.query(vector=vec, top_k=100, include_values=True, namespace="")
+    res = index.query(vector=vec, top_k=10000, include_values=True, namespace="")
     return list(map(lambda x: x['id'], res.matches))
 
 def delete_idx():
