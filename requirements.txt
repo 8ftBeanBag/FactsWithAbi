@@ -2,3 +2,5 @@ beautifulsoup4==4.12.2
 openai==0.28.0
 python-decouple==3.8
 langchain==0.0.285
+flask==2.3.3
+flask-cors==4.0.0
