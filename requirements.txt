@@ -4,3 +4,5 @@ python-decouple==3.8
 langchain==0.0.285
 flask==2.3.3
 flask-cors==4.0.0
+tiktoken==0.4.0
+pinecone-client==2.31.0

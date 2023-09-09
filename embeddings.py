@@ -5,9 +5,6 @@ import pinecone
 
 INDEX = "shakespeare"
 def connect():
-    openai.organization = config('OPEN_AI_ORG')
-    openai.api_key = config('OPEN_AI_KEY')
-
     pinecone.init(api_key=config("PINECONE_KEY"), environment=config("PINECONE_ENV"))
 
 
